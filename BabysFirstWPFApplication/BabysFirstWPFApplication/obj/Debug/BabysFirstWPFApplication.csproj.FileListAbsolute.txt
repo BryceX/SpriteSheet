@@ -14,3 +14,19 @@ c:\users\bryson.au\documents\visual studio 2013\Projects\BabysFirstWPFApplicatio
 c:\users\bryson.au\documents\visual studio 2013\Projects\BabysFirstWPFApplication\BabysFirstWPFApplication\obj\Debug\App.baml
 c:\users\bryson.au\documents\visual studio 2013\Projects\BabysFirstWPFApplication\BabysFirstWPFApplication\obj\Debug\BabysFirstWPFApplication_MarkupCompile.lref
 c:\users\bryson.au\documents\visual studio 2013\Projects\BabysFirstWPFApplication\BabysFirstWPFApplication\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\bryson.au\Documents\GitHub\SpriteSheet\BabysFirstWPFApplication\BabysFirstWPFApplication\bin\Debug\BabysFirstWPFApplication.exe.config
+C:\Users\bryson.au\Documents\GitHub\SpriteSheet\BabysFirstWPFApplication\BabysFirstWPFApplication\obj\Debug\BabysFirstWPFApplication.exe
+C:\Users\bryson.au\Documents\GitHub\SpriteSheet\BabysFirstWPFApplication\BabysFirstWPFApplication\obj\Debug\BabysFirstWPFApplication.pdb
+C:\Users\bryson.au\Documents\GitHub\SpriteSheet\BabysFirstWPFApplication\BabysFirstWPFApplication\bin\Debug\BabysFirstWPFApplication.exe
+C:\Users\bryson.au\Documents\GitHub\SpriteSheet\BabysFirstWPFApplication\BabysFirstWPFApplication\bin\Debug\BabysFirstWPFApplication.pdb
+C:\Users\bryson.au\Documents\GitHub\SpriteSheet\BabysFirstWPFApplication\BabysFirstWPFApplication\obj\Debug\BabysFirstWPFApplication.csprojResolveAssemblyReference.cache
+C:\Users\bryson.au\Documents\GitHub\SpriteSheet\BabysFirstWPFApplication\BabysFirstWPFApplication\obj\Debug\App.baml
+C:\Users\bryson.au\Documents\GitHub\SpriteSheet\BabysFirstWPFApplication\BabysFirstWPFApplication\obj\Debug\MainWindow.g.cs
+C:\Users\bryson.au\Documents\GitHub\SpriteSheet\BabysFirstWPFApplication\BabysFirstWPFApplication\obj\Debug\App.g.cs
+C:\Users\bryson.au\Documents\GitHub\SpriteSheet\BabysFirstWPFApplication\BabysFirstWPFApplication\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\bryson.au\Documents\GitHub\SpriteSheet\BabysFirstWPFApplication\BabysFirstWPFApplication\obj\Debug\BabysFirstWPFApplication_MarkupCompile.cache
+C:\Users\bryson.au\Documents\GitHub\SpriteSheet\BabysFirstWPFApplication\BabysFirstWPFApplication\obj\Debug\BabysFirstWPFApplication_MarkupCompile.lref
+C:\Users\bryson.au\Documents\GitHub\SpriteSheet\BabysFirstWPFApplication\BabysFirstWPFApplication\obj\Debug\MainWindow.baml
+C:\Users\bryson.au\Documents\GitHub\SpriteSheet\BabysFirstWPFApplication\BabysFirstWPFApplication\obj\Debug\BabysFirstWPFApplication.g.resources
+C:\Users\bryson.au\Documents\GitHub\SpriteSheet\BabysFirstWPFApplication\BabysFirstWPFApplication\obj\Debug\BabysFirstWPFApplication.Properties.Resources.resources
+C:\Users\bryson.au\Documents\GitHub\SpriteSheet\BabysFirstWPFApplication\BabysFirstWPFApplication\obj\Debug\BabysFirstWPFApplication.csproj.GenerateResource.Cache

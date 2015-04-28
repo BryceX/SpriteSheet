@@ -29,7 +29,7 @@ namespace BabysFirstWPFApplication
         bool Confirm = false;
 
         public ObservableCollection<User> myList;
-
+        public ObservableCollection<MySprite> imageList;
         public MainWindow()
         {
             InitializeComponent();
@@ -61,6 +61,15 @@ namespace BabysFirstWPFApplication
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             myList.Add(new User() { Name = "FileName"});
+            Microsoft.Win32.OpenFileDialog LoadedFile = new Microsoft.Win32.OpenFileDialog();
+            LoadedFile.DefaultExt = ".png"; // default file extension
+            LoadedFile.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg";
+            Nullable<bool> IsFileThere = LoadedFile.ShowDialog();
+            if (IsFileThere == true)
+            {
+               myList.Add(new User() { Name = LoadedFile.FileName });
+             
+            }
         }
 
         private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -73,6 +82,22 @@ namespace BabysFirstWPFApplication
 
         }
        
+    }
+
+
+
+    public class MySprite
+    {
+        private int image;
+        private float width;
+        private float height;
+        private float x;
+        private float y;
+
+
+
+
+
     }
 
     public class User : INotifyPropertyChanged
