@@ -25,21 +25,22 @@ namespace BabysFirstWPFApplication
     public partial class MainWindow : Window
     {
 
+        public List<MySprite> temp = new List<MySprite>();
+        
         string dataBound {get; set;} 
         bool Confirm = false;
 
-        public ObservableCollection<User> myList;
-        public ObservableCollection<MySprite> imageList;
+       
+        
         
         public MainWindow()
         {
             InitializeComponent();
             DataContext = this;
 
-            myList = new ObservableCollection<User>();
-            myList.Add(new User() { Name = "FileName" });
+            
 
-            listView.ItemsSource = myList;
+            
 
             
 
@@ -64,32 +65,28 @@ namespace BabysFirstWPFApplication
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            myList.Add(new User() { Name = "FileName"});
             Microsoft.Win32.OpenFileDialog LoadedFile = new Microsoft.Win32.OpenFileDialog();
          
             LoadedFile.DefaultExt = ".png"; // default file extension
             LoadedFile.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg";
-            object myImage = LoadedFile;
+           
+            
             Nullable<bool> IsFileThere = LoadedFile.ShowDialog();
             if (IsFileThere == true)
             {
-               myList.Add(new User() { Name = LoadedFile.FileName });
+               //temp.Add(new MySprite(new BitmapImage(new Uri(LoadedFile.FileName))));
+                temp.Add(new MySprite(LoadedFile.FileName));
+                MySprite tempname1 = new MySprite(new Uri(LoadedFile.FileName));
 
-               // Create the image element.
-               Image zero = new Image();
-               zero.Width = 200;
-               zero.Height = 200;
-               zero.Margin = new Thickness(5);
-
-               // Create source.
-               BitmapImage bi = new BitmapImage();
-               // BitmapImage.UriSource must be in a BeginInit/EndInit block.
-               bi.BeginInit();
-               bi.UriSource = new Uri(LoadedFile.FileName, UriKind.RelativeOrAbsolute);
-               bi.EndInit();
-               // Set the image source.
-               zero.Source = bi;
+                Image tempImage = new Image();
+                Screen.Children.Add();
+                //tempImage.Source = tempname1.spriteImage;
+               // Canvas.SetLeft(tempImage, 0);
+               // Canvas.SetTop(tempImage, 0);
+                
             }
+
+            Console.WriteLine("Sprite Count " + temp.Count);
         }
 
         private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -108,6 +105,17 @@ namespace BabysFirstWPFApplication
 
     public class MySprite
     {
+        public MySprite(Uri temp) 
+        {
+            spriteImage = new BitmapImage(temp);
+        }
+
+        public MySprite(string imagePath)
+        {
+            BitmapImage sprite = new BitmapImage(new Uri(imagePath));
+
+            spriteImage = sprite;
+        }
         private int width;
         private int height;
         private float x;
@@ -120,7 +128,7 @@ namespace BabysFirstWPFApplication
     
    
     
-    public class User : INotifyPropertyChanged
+    public class Image : INotifyPropertyChanged
     {
         private string name;
         public string Name

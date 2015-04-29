@@ -4,7 +4,7 @@
         xmlns:local="clr-namespace:BabysFirstWPFApplication"
         Title="{StaticResource ResourceKey=applicationName}" Height="358" Width="525">
     <Window.Resources>
-        <DataTemplate DataType="{x:Type local:User}">
+        <DataTemplate DataType="{x:Type local:Image}">
             <StackPanel Orientation="Horizontal">
 
                 <TextBlock Text="{Binding Name}"/>
@@ -27,7 +27,7 @@
 
         </ListBox>
 
-        <Canvas>
+        <Canvas Name="Screen">
             <Image Name="TestImage" Source="zeroprofile.jpg" Height="298" Width="276" Panel.ZIndex="30"/>
             <Image Name="TestImage2" Source="zeroprofile.jpg" Height="298" Width="276" Panel.ZIndex="30" Canvas.Left="276"/>
             
