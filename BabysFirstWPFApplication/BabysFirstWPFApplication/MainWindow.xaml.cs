@@ -30,6 +30,7 @@ namespace BabysFirstWPFApplication
 
         public ObservableCollection<User> myList;
         public ObservableCollection<MySprite> imageList;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -39,6 +40,10 @@ namespace BabysFirstWPFApplication
             myList.Add(new User() { Name = "FileName" });
 
             listView.ItemsSource = myList;
+
+            
+
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -47,7 +52,6 @@ namespace BabysFirstWPFApplication
             Console.WriteLine("click");
             if (Confirm)
             {
-                //HelloWorldBox.Text = "3 + 4 = ?";
                 dataBound = "dame";
             }
 
@@ -62,13 +66,29 @@ namespace BabysFirstWPFApplication
         {
             myList.Add(new User() { Name = "FileName"});
             Microsoft.Win32.OpenFileDialog LoadedFile = new Microsoft.Win32.OpenFileDialog();
+         
             LoadedFile.DefaultExt = ".png"; // default file extension
             LoadedFile.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg";
+            object myImage = LoadedFile;
             Nullable<bool> IsFileThere = LoadedFile.ShowDialog();
             if (IsFileThere == true)
             {
                myList.Add(new User() { Name = LoadedFile.FileName });
-             
+
+               // Create the image element.
+               Image zero = new Image();
+               zero.Width = 200;
+               zero.Height = 200;
+               zero.Margin = new Thickness(5);
+
+               // Create source.
+               BitmapImage bi = new BitmapImage();
+               // BitmapImage.UriSource must be in a BeginInit/EndInit block.
+               bi.BeginInit();
+               bi.UriSource = new Uri(LoadedFile.FileName, UriKind.RelativeOrAbsolute);
+               bi.EndInit();
+               // Set the image source.
+               zero.Source = bi;
             }
         }
 
@@ -83,23 +103,23 @@ namespace BabysFirstWPFApplication
         }
        
     }
-
+    
 
 
     public class MySprite
     {
-        private int image;
-        private float width;
-        private float height;
+        private int width;
+        private int height;
         private float x;
         private float y;
 
-
-
-
-
+        public BitmapImage spriteImage;
+        
+        private string fileName;
     }
-
+    
+   
+    
     public class User : INotifyPropertyChanged
     {
         private string name;

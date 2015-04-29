@@ -48,6 +48,22 @@ namespace BabysFirstWPFApplication {
         #line default
         #line hidden
         
+        
+        #line 31 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Image TestImage;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 32 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Image TestImage2;
+        
+        #line default
+        #line hidden
+        
         private bool _contentLoaded;
         
         /// <summary>
@@ -94,6 +110,12 @@ namespace BabysFirstWPFApplication {
             
             #line default
             #line hidden
+            return;
+            case 3:
+            this.TestImage = ((System.Windows.Controls.Image)(target));
+            return;
+            case 4:
+            this.TestImage2 = ((System.Windows.Controls.Image)(target));
             return;
             }
             this._contentLoaded = true;
