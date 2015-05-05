@@ -4,32 +4,31 @@
         xmlns:local="clr-namespace:BabysFirstWPFApplication"
         Title="{StaticResource ResourceKey=applicationName}" Height="358" Width="525">
     <Window.Resources>
-        <DataTemplate DataType="{x:Type local:Image}">
+
+        <DataTemplate DataType="{x:Type local:MySprite}">
             <StackPanel Orientation="Horizontal">
-
-                <TextBlock Text="{Binding Name}"/>
-
-
+                <TextBlock Text="{Binding Path=FileName}"/>
             </StackPanel>
-
         </DataTemplate>
+        
     </Window.Resources>
 
     <DockPanel Margin="0,0,0,0">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Add" Click="MenuItem_Click"/>
-            <Button Content="Button" Height="25" VerticalAlignment="Center" Width="50" RenderTransformOrigin="0,0" />
+            
 
 
         </Menu>
 
-        <ListBox Name="listView" SelectionChanged="listView_SelectionChanged" Width="92" HorizontalAlignment="Left">
+        
+            <ListView Name="TheBox" SelectionChanged="listView_SelectionChanged" Width="100" HorizontalAlignment="Left" Margin="0,0,0,0">
+                
+            </ListView>
+        
 
-        </ListBox>
-
-        <Canvas Name="Screen">
-            <Image Name="TestImage" Source="zeroprofile.jpg" Height="298" Width="276" Panel.ZIndex="30"/>
-            <Image Name="TestImage2" Source="zeroprofile.jpg" Height="298" Width="276" Panel.ZIndex="30" Canvas.Left="276"/>
+        <Canvas Name="Screen" Margin="0,0,0,0">
+            
             
         </Canvas>
 

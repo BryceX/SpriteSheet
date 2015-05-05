@@ -25,11 +25,10 @@ namespace BabysFirstWPFApplication
     public partial class MainWindow : Window
     {
 
-        public List<MySprite> temp = new List<MySprite>();
-        
+        public ObservableCollection<MySprite> temp = new ObservableCollection<MySprite>();
         string dataBound {get; set;} 
         bool Confirm = false;
-
+        int xPos = 0;
        
         
         
@@ -38,7 +37,7 @@ namespace BabysFirstWPFApplication
             InitializeComponent();
             DataContext = this;
 
-            
+            TheBox.ItemsSource = temp;
 
             
 
@@ -53,7 +52,7 @@ namespace BabysFirstWPFApplication
             Console.WriteLine("click");
             if (Confirm)
             {
-                dataBound = "dame";
+                dataBound = "dameeeeeeeee";
             }
 
         }
@@ -74,19 +73,38 @@ namespace BabysFirstWPFApplication
             Nullable<bool> IsFileThere = LoadedFile.ShowDialog();
             if (IsFileThere == true)
             {
-               //temp.Add(new MySprite(new BitmapImage(new Uri(LoadedFile.FileName))));
-                temp.Add(new MySprite(LoadedFile.FileName));
-                MySprite tempname1 = new MySprite(new Uri(LoadedFile.FileName));
-
-                Image tempImage = new Image();
-                Screen.Children.Add();
-                //tempImage.Source = tempname1.spriteImage;
-               // Canvas.SetLeft(tempImage, 0);
-               // Canvas.SetTop(tempImage, 0);
+                //Screen.Children.Clear();
+                MySprite spriteName = new MySprite( LoadedFile.FileName );
+                temp.Add(spriteName);
                 
+                Image sprite = new Image();
+                
+                sprite.Source = spriteName.spriteImage;
+                Screen.Children.Add(sprite);
+                //var left = (double)sprite.GetValue(Canvas.LeftProperty);
+                //left += 50;
+                
+                
+                Canvas.SetLeft(sprite, xPos);
+
+
+
+
+               ////temp.Add(new MySprite(new BitmapImage(new Uri(LoadedFile.FileName)))); butts
+               // temp.Add(new MySprite(LoadedFile.FileName));
+                
+               // MySprite tempname1 = new MySprite(new Uri(LoadedFile.FileName));
+                
+               
+               // sprite.Source = tempname1.spriteImage;
+               // //tempImage.Source = tempname1.spriteImage;
+               // Canvas.SetLeft(sprite, (double)0.0);
+               // Canvas.SetTop(sprite, (double)0.0);
+
+                xPos += (int)spriteName.spriteImage.Width;
             }
 
-            Console.WriteLine("Sprite Count " + temp.Count);
+            Console.WriteLine("Sprite Count" + temp.Count);
         }
 
         private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -103,20 +121,33 @@ namespace BabysFirstWPFApplication
     
 
 
-    public class MySprite
+    public class MySprite : INotifyPropertyChanged
     {
-        public MySprite(Uri temp) 
-        {
-            spriteImage = new BitmapImage(temp);
-        }
 
         public MySprite(string imagePath)
         {
             BitmapImage sprite = new BitmapImage(new Uri(imagePath));
 
             spriteImage = sprite;
+
+            FileName = System.IO.Path.GetFileName( imagePath );
         }
         private int width;
+        public int Width 
+        {
+            get 
+            {
+                return width;
+            }
+            set 
+            {
+                if (width != value)
+                {
+                    width = value;
+                    NotifyPropertyChanged("Width");
+                }
+            }
+        }
         private int height;
         private float x;
         private float y;
@@ -124,48 +155,30 @@ namespace BabysFirstWPFApplication
         public BitmapImage spriteImage;
         
         private string fileName;
-    }
-    
-   
-    
-    public class Image : INotifyPropertyChanged
-    {
-        private string name;
-        public string Name
+        public string FileName
         {
+            get { return fileName; }
             set
             {
-                name = value;
-                NotifyPropertyChanged("Name");
-            }
-            get
-            {
-                return name;
-            }
-        }
-
-        private int age;
-        public int Age
-        {
-            set
-            {
-                age = value;
-                NotifyPropertyChanged("Age");
-            }
-            get
-            {
-                return age;
+                if (fileName != value)
+                {
+                    fileName = value;
+                    NotifyPropertyChanged("FileName");
+                }
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public void NotifyPropertyChanged(string propName)
+        public void NotifyPropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
     }
+    
+   
+    
+   
 }
