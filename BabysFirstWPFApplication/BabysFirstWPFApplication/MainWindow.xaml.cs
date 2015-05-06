@@ -28,7 +28,7 @@ namespace BabysFirstWPFApplication
         public ObservableCollection<MySprite> spriteList = new ObservableCollection<MySprite>();
         string dataBound {get; set;} 
         bool Confirm = false;
-        int xPos = 0;
+        
        
         
         
@@ -69,46 +69,61 @@ namespace BabysFirstWPFApplication
             if (IsFileThere == true)
             {
                 //Screen.Children.Clear();
-                MySprite spriteName = new MySprite( LoadedFile.FileName );
+                MySprite spriteName = new MySprite(LoadedFile.FileName);
                 spriteList.Add(spriteName);
-                
-                Screen.Children.Add(spriteName.spriteImage);
-                
-                
-                
-                
-                
-                Canvas.SetLeft(spriteName.spriteImage, xPos);
 
+                ClearCanvas();
                 
+                //Screen.Children.Add(spriteName.spriteImage);
+                
+                //Screen.Children.Add(spriteName.spriteImage);
 
 
-               ////temp.Add(new MySprite(new BitmapImage(new Uri(LoadedFile.FileName)))); butts
-               // temp.Add(new MySprite(LoadedFile.FileName));
+
                 
-               // MySprite tempname1 = new MySprite(new Uri(LoadedFile.FileName));
                 
+                //Canvas.SetLeft(spriteName.spriteImage, xPos);
+                //xPos += (int)spriteName.spriteBitmapImage.Width;
+
+                //for (int i = 0; i < spriteList.Count; i++)
+                //{
+                    
+                //}
+
                
-               // sprite.Source = tempname1.spriteImage;
-               // //tempImage.Source = tempname1.spriteImage;
-               // Canvas.SetLeft(sprite, (double)0.0);
-               // Canvas.SetTop(sprite, (double)0.0);
 
-                xPos += (int)spriteName.spriteBitmapImage.Width;
+                
             }
 
-            Console.WriteLine("Sprite Count" + spriteList.Count);
+           
         }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
-        {
+        { 
             MySprite selectedSprite = TheBox.SelectedItem as MySprite;
-            Screen.Children.Remove(selectedSprite.spriteImage);
-            spriteList.Remove(selectedSprite);
-          
+            if (selectedSprite !=null)
+            {
+            
+                spriteList.Remove(selectedSprite);
+                ClearCanvas();
+            
+
+                
+            }
         }
        
+        public void ClearCanvas()
+        {
+            Screen.Children.Clear();
+            int xPos = 0;
+            for (int i = 0; i < spriteList.Count; i++)
+            {
+                Screen.Children.Add(spriteList[i].spriteImage);
+                Canvas.SetLeft(spriteList[i].spriteImage, xPos);
 
+                xPos += (int)spriteList[i].spriteBitmapImage.Width;
+            }
+        }
         private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -158,8 +173,53 @@ namespace BabysFirstWPFApplication
             }
         }
         private int height;
-        private float x;
-        private float y;
+        public int Height
+        {
+            get
+            {
+                return height;
+            }
+            set
+            {
+                if (height != value)
+                {
+                    height = value;
+                    NotifyPropertyChanged("Width");
+                }
+            }
+        }
+        private int x;
+        public int X
+        {
+            get
+            {
+                return x;
+            }
+            set
+            {
+                if (x != value)
+                {
+                    x = value;
+                    NotifyPropertyChanged("Width");
+                }
+            }
+        }
+        private int y;
+        public int Y
+        {
+            get
+            {
+                return y;
+            }
+            set
+            {
+                if (y != value)
+                {
+                    y = value;
+                    NotifyPropertyChanged("Width");
+                }
+            }
+        }
 
         public BitmapImage spriteBitmapImage;
         public Image spriteImage;
