@@ -10,27 +10,27 @@
                 <TextBlock Text="{Binding Path=FileName}"/>
             </StackPanel>
         </DataTemplate>
-        
+
     </Window.Resources>
 
     <DockPanel Margin="0,0,0,0">
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Add" Click="MenuItem_Click"/>
             
+            <MenuItem Header="Add" Click="Add_Click" Width="50"/>
+            <MenuItem Header="Delete" Width="50" Click="MenuItem_Click_1"/>
+            <MenuItem Header="name" Width="50" Click="MenuItem_Click_2"/>
+            <MenuItem Header="othername" Width="50"/>
 
 
         </Menu>
 
-        
-            <ListView Name="TheBox" SelectionChanged="listView_SelectionChanged" Width="100" HorizontalAlignment="Left" Margin="0,0,0,0">
-                
-            </ListView>
-        
 
-        <Canvas Name="Screen" Margin="0,0,0,0">
-            
-            
-        </Canvas>
+        <ListView Name="TheBox" SelectionChanged="listView_SelectionChanged" Width="100" HorizontalAlignment="Left" Margin="0,0,0,0">
+
+        </ListView>
+
+
+        <Canvas Name="Screen" Margin="0,0,0,0"/>
 
     </DockPanel>
 </Window>

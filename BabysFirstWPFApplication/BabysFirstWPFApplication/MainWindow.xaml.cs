@@ -24,8 +24,8 @@ namespace BabysFirstWPFApplication
    
     public partial class MainWindow : Window
     {
-
-        public ObservableCollection<MySprite> temp = new ObservableCollection<MySprite>();
+        //public List<Image> imageList = new List<Image>();
+        public ObservableCollection<MySprite> spriteList = new ObservableCollection<MySprite>();
         string dataBound {get; set;} 
         bool Confirm = false;
         int xPos = 0;
@@ -37,12 +37,7 @@ namespace BabysFirstWPFApplication
             InitializeComponent();
             DataContext = this;
 
-            TheBox.ItemsSource = temp;
-
-            
-
-            
-
+            TheBox.ItemsSource = spriteList;
 
         }
 
@@ -52,7 +47,7 @@ namespace BabysFirstWPFApplication
             Console.WriteLine("click");
             if (Confirm)
             {
-                dataBound = "dameeeeeeeee";
+                dataBound = "done";
             }
 
         }
@@ -62,7 +57,7 @@ namespace BabysFirstWPFApplication
             
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void Add_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog LoadedFile = new Microsoft.Win32.OpenFileDialog();
          
@@ -75,19 +70,17 @@ namespace BabysFirstWPFApplication
             {
                 //Screen.Children.Clear();
                 MySprite spriteName = new MySprite( LoadedFile.FileName );
-                temp.Add(spriteName);
+                spriteList.Add(spriteName);
                 
-                Image sprite = new Image();
-                
-                sprite.Source = spriteName.spriteImage;
-                Screen.Children.Add(sprite);
-                //var left = (double)sprite.GetValue(Canvas.LeftProperty);
-                //left += 50;
+                Screen.Children.Add(spriteName.spriteImage);
                 
                 
-                Canvas.SetLeft(sprite, xPos);
+                
+                
+                
+                Canvas.SetLeft(spriteName.spriteImage, xPos);
 
-
+                
 
 
                ////temp.Add(new MySprite(new BitmapImage(new Uri(LoadedFile.FileName)))); butts
@@ -101,22 +94,34 @@ namespace BabysFirstWPFApplication
                // Canvas.SetLeft(sprite, (double)0.0);
                // Canvas.SetTop(sprite, (double)0.0);
 
-                xPos += (int)spriteName.spriteImage.Width;
+                xPos += (int)spriteName.spriteBitmapImage.Width;
             }
 
-            Console.WriteLine("Sprite Count" + temp.Count);
+            Console.WriteLine("Sprite Count" + spriteList.Count);
         }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            MySprite selectedSprite = TheBox.SelectedItem as MySprite;
+            Screen.Children.Remove(selectedSprite.spriteImage);
+            spriteList.Remove(selectedSprite);
+          
+        }
+       
 
         private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
 
         }
+
        
+
+        
     }
     
 
@@ -126,9 +131,13 @@ namespace BabysFirstWPFApplication
 
         public MySprite(string imagePath)
         {
-            BitmapImage sprite = new BitmapImage(new Uri(imagePath));
+            BitmapImage bitmap = new BitmapImage(new Uri(imagePath));
+            Image sprite = new Image();
 
+            spriteBitmapImage = bitmap;
             spriteImage = sprite;
+
+            spriteImage.Source = bitmap;
 
             FileName = System.IO.Path.GetFileName( imagePath );
         }
@@ -152,7 +161,8 @@ namespace BabysFirstWPFApplication
         private float x;
         private float y;
 
-        public BitmapImage spriteImage;
+        public BitmapImage spriteBitmapImage;
+        public Image spriteImage;
         
         private string fileName;
         public string FileName
