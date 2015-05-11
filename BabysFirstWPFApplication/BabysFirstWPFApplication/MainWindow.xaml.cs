@@ -12,9 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.Drawing;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
+
 
 namespace BabysFirstWPFApplication
 {
@@ -40,7 +42,11 @@ namespace BabysFirstWPFApplication
             TheBox.ItemsSource = spriteList;
 
         }
-
+      
+        public void SaveGif()
+        { 
+            
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Confirm = true;
@@ -60,7 +66,7 @@ namespace BabysFirstWPFApplication
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog LoadedFile = new Microsoft.Win32.OpenFileDialog();
-         
+           
             LoadedFile.DefaultExt = ".png"; // default file extension
             LoadedFile.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg";
            
@@ -70,25 +76,13 @@ namespace BabysFirstWPFApplication
             {
                 //Screen.Children.Clear();
                 MySprite spriteName = new MySprite(LoadedFile.FileName);
+            
                 spriteList.Add(spriteName);
 
                 ClearCanvas();
-                
-                //Screen.Children.Add(spriteName.spriteImage);
-                
-                //Screen.Children.Add(spriteName.spriteImage);
-
 
 
                 
-                
-                //Canvas.SetLeft(spriteName.spriteImage, xPos);
-                //xPos += (int)spriteName.spriteBitmapImage.Width;
-
-                //for (int i = 0; i < spriteList.Count; i++)
-                //{
-                    
-                //}
 
                
 
@@ -116,13 +110,20 @@ namespace BabysFirstWPFApplication
         {
             Screen.Children.Clear();
             int xPos = 0;
+            int height = 0;
             for (int i = 0; i < spriteList.Count; i++)
             {
                 Screen.Children.Add(spriteList[i].spriteImage);
                 Canvas.SetLeft(spriteList[i].spriteImage, xPos);
 
                 xPos += (int)spriteList[i].spriteBitmapImage.Width;
+                if ((int)spriteList[i].spriteBitmapImage.Height > height)
+                {
+                    height = (int)spriteList[i].spriteBitmapImage.Height;
+                }
             }
+            Screen.Width = xPos;
+            Screen.Height = height;
         }
         private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -131,7 +132,48 @@ namespace BabysFirstWPFApplication
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
+            
+            Microsoft.Win32.SaveFileDialog savedFile = new Microsoft.Win32.SaveFileDialog();
+            
+            if (savedFile.ShowDialog() == true)
+            {
+                Size screenSize = new Size(Screen.Width, Screen.Height);
+                Screen.Measure(screenSize);
+                Screen.Arrange(new Rect(screenSize));
+                Rect temp = new Rect(Screen.RenderSize);
+                // Build the final image
+                RenderTargetBitmap tempImage = new RenderTargetBitmap((int)temp.Right, (int)temp.Bottom, 96d, 96d, System.Windows.Media.PixelFormats.Default);
+                tempImage.Render(Screen);
+                BitmapEncoder png = new PngBitmapEncoder();
+                png.Frames.Add(BitmapFrame.Create(tempImage));
 
+                // OPen a stream to the desired file 
+               
+                // Save to the stream
+                System.IO.MemoryStream imageStream = new System.IO.MemoryStream();
+                png.Save(imageStream);
+                //Save(savedFile.FileName);
+                // Close the stream
+                imageStream.Close();
+                System.IO.File.WriteAllBytes(savedFile.FileName, imageStream.ToArray());
+                Console.WriteLine("Completed");
+            
+            }
+
+            //try
+            //{
+            //    if (savedFile != null)
+            //    {
+            //        
+            //    }
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("There was a problem saving the file." +
+            //        "Check the file permissions.");
+            //}
+
+           
         }
 
        
