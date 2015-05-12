@@ -1,11 +1,11 @@
-﻿<Window x:Class="BabysFirstWPFApplication.MainWindow"
+﻿<Window x:Class="SpriteSheet.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:BabysFirstWPFApplication"
+        xmlns:local="clr-namespace:SpriteSheet"
         Title="{StaticResource ResourceKey=applicationName}" Height="358" Width="525">
     <Window.Resources>
-
-        <DataTemplate DataType="{x:Type local:MySprite}">
+        <XmlDataProvider x:Key="myXml" Source="imageData.xml" XPath="ImageData/ImageSize"/>
+            <DataTemplate DataType="{x:Type local:MySprite}">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding Path=FileName}"/>
             </StackPanel>

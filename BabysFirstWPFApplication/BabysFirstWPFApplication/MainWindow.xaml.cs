@@ -16,9 +16,10 @@ using System.Drawing;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Xml.Linq;
 
 
-namespace BabysFirstWPFApplication
+namespace SpriteSheet
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -43,8 +44,23 @@ namespace BabysFirstWPFApplication
 
         }
       
-        public void SaveGif()
-        { 
+        void SaveXml()
+        {
+            XDocument myXml = new XDocument(new XDeclaration ("1.0", "utf-8", "yes"));
+
+            Object[] myArray = new Object[spriteList.Count];
+            for (int i = 0; i < spriteList.Count; i++)
+            {
+                XElement spriteLocation = new XElement("sprite");
+                spriteLocation.SetAttributeValue("x", 25);
+                spriteLocation.SetAttributeValue("y", 25);
+                spriteLocation.SetAttributeValue("width", 25);
+                spriteLocation.SetAttributeValue("height", 25);
+
+                myArray[i] = spriteLocation;
+            }
+
+            myXml.Add(myArray);
             
         }
         private void Button_Click(object sender, RoutedEventArgs e)
