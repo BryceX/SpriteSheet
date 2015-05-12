@@ -49,19 +49,22 @@ namespace SpriteSheet
             XDocument myXml = new XDocument(new XDeclaration (/* version of xml*/"1.0", /*encoding*/ "utf-8", /*standalone*/ "yes"));
 
             Object[] myArray = new Object[spriteList.Count];
+            XElement arrayHolder = new XElement("sprites");
             for (int i = 0; i < spriteList.Count; i++)
             {
 
                 XElement spriteLocation = new XElement("sprite");
-                spriteLocation.SetAttributeValue("x", 25);
-                spriteLocation.SetAttributeValue("y", 25);
-                spriteLocation.SetAttributeValue("width", 25);
-                spriteLocation.SetAttributeValue("height", 25);
+
+                spriteLocation.SetAttributeValue("x", spriteList[i].X);
+                spriteLocation.SetAttributeValue("y", spriteList[i].Y);
+                spriteLocation.SetAttributeValue("width", spriteList[i].Width);
+                spriteLocation.SetAttributeValue("height", spriteList[i].Height);
+
                 myArray[i] = spriteLocation;
-
             }
-
-            myXml.Add(myArray);
+            arrayHolder.Add(myArray);
+            myXml.Add(arrayHolder);
+            
             string fileName = System.IO.Path.ChangeExtension(temp, ".xml");
             FileStream myFileStream = new FileStream(fileName, FileMode.Create);
             myXml.Save(myFileStream);
@@ -136,6 +139,10 @@ namespace SpriteSheet
             {
                 Screen.Children.Add(spriteList[i].spriteImage);
                 Canvas.SetLeft(spriteList[i].spriteImage, xPos);
+                spriteList[i].X = xPos;
+                spriteList[i].Y = height;
+                spriteList[i].Width = (int) spriteList[i].spriteBitmapImage.Width;
+                spriteList[i].Height = (int)spriteList[i].spriteBitmapImage.Height;
 
                 xPos += (int)spriteList[i].spriteBitmapImage.Width;
                 if ((int)spriteList[i].spriteBitmapImage.Height > height)
@@ -145,6 +152,7 @@ namespace SpriteSheet
             }
             Screen.Width = xPos;
             Screen.Height = height;
+            
         }
         private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
