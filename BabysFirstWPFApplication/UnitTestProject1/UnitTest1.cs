@@ -1,6 +1,7 @@
 ﻿using System;
-
+using SpriteSheet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.ObjectModel;
 
 namespace UnitTestProject1
 {
@@ -8,19 +9,58 @@ namespace UnitTestProject1
 
     public class UnitTest1
     {
-        [TestMethod]
 
-        class Mysprite 
-        {
-       
+
+        MySprite bryson = null;
+        [TestInitialize]
+        public void Init()
+        { 
+        bryson = new MySprite(Environment.CurrentDirectory+@"\foo.png");
         }
-        public void FileLoaded()
+
+
+        [TestMethod]
+        public void ConstructorTest()
         {
+            Assert.AreEqual(@"foo.png", bryson.FileName);
+            Assert.AreEqual(0, bryson.Width);
+            Assert.AreEqual(0, bryson.Height);
+            Assert.AreEqual(0,bryson.X);
+            Assert.AreEqual(0, bryson.Y);
            
-            Mysprite temp = new Mysprite();
-          
-            Nullable<bool> expected = true;
-            Assert.Equals(expected, );
+
+
         }
+
+
+        [TestMethod]
+        public void Width()
+        { 
+        bryson.Width = 100;
+        
+        Assert.AreEqual(100, bryson.Width);
+        
+        }
+        [TestMethod]
+        public void Height()
+        { 
+            bryson.Height = 56;
+            Assert.AreEqual(56, bryson.Height);
+        }
+
+        [TestMethod]
+        public void X()
+        {
+            bryson.X = 6;
+            Assert.AreEqual(6, bryson.X);
+        }
+        [TestMethod]
+        public void Y()
+        {
+            bryson.Y = 556;
+            Assert.AreEqual(556, bryson.Y);
+        }
+
+        
     }
 }

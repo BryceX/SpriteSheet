@@ -19,7 +19,7 @@
             <MenuItem Header="Add" Click="Add_Click" Width="50"/>
             <MenuItem Header="Delete" Width="50" Click="MenuItem_Click_1"/>
             <MenuItem Header="Save" Width="50" Click="MenuItem_Click_2"/>
-            <MenuItem Header="othername" Width="50"/>
+           
 
 
         </Menu>

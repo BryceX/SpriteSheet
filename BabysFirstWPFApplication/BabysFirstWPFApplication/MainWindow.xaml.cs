@@ -71,6 +71,8 @@ namespace SpriteSheet
             myFileStream.Close();
             
         }
+
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Confirm = true;
@@ -89,28 +91,25 @@ namespace SpriteSheet
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
+            //opens a file dialogue, which allows you to choose a file
             Microsoft.Win32.OpenFileDialog LoadedFile = new Microsoft.Win32.OpenFileDialog();
            
             LoadedFile.DefaultExt = ".png"; // default file extension
+            //files it takes
             LoadedFile.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg";
            
             
             Nullable<bool> IsFileThere = LoadedFile.ShowDialog();
+            //if there is something to actually load
             if (IsFileThere == true)
             {
-                //Screen.Children.Clear();
+                //creates a new MySprite object using the file we selected
                 MySprite spriteName = new MySprite(LoadedFile.FileName);
             
+                //adds it to the global list
                 spriteList.Add(spriteName);
-               
+               //clears the canvas and redraws everything if something was erased
                 ClearCanvas();
-
-
-                
-
-               
-
-                
             }
 
            
@@ -234,9 +233,9 @@ namespace SpriteSheet
 
             spriteImage.Source = bitmap;
 
-            FileName = System.IO.Path.GetFileName( imagePath );
+            fileName = System.IO.Path.GetFileName( imagePath );
         }
-        private int width;
+        private int width = 0;
         public int Width 
         {
             get 
@@ -252,7 +251,7 @@ namespace SpriteSheet
                 }
             }
         }
-        private int height;
+        private int height = 0;
         public int Height
         {
             get
@@ -264,11 +263,11 @@ namespace SpriteSheet
                 if (height != value)
                 {
                     height = value;
-                    NotifyPropertyChanged("Width");
+                    NotifyPropertyChanged("Height");
                 }
             }
         }
-        private int x;
+        private int x = 0;
         public int X
         {
             get
@@ -280,11 +279,11 @@ namespace SpriteSheet
                 if (x != value)
                 {
                     x = value;
-                    NotifyPropertyChanged("Width");
+                    NotifyPropertyChanged("X");
                 }
             }
         }
-        private int y;
+        private int y = 0;
         public int Y
         {
             get
@@ -296,7 +295,7 @@ namespace SpriteSheet
                 if (y != value)
                 {
                     y = value;
-                    NotifyPropertyChanged("Width");
+                    NotifyPropertyChanged("Y");
                 }
             }
         }
@@ -308,14 +307,14 @@ namespace SpriteSheet
         public string FileName
         {
             get { return fileName; }
-            set
-            {
-                if (fileName != value)
-                {
-                    fileName = value;
-                    NotifyPropertyChanged("FileName");
-                }
-            }
+            //set
+            //{
+            //    if (fileName != value)
+            //    {
+            //        fileName = value;
+            //        NotifyPropertyChanged("FileName");
+            //    }
+            //}
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

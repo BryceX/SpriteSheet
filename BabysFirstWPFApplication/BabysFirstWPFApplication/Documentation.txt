@@ -1,0 +1,63 @@
+Open application.  
+Check to see that there are two boxes, the left one being skinnier than the right.  
+Check to see that there are Add, Delete, and Save buttons.
+Clicking the Add button should bring up a prompt to select a jpg, png, or jpeg file.
+Opening a file should load an image and display the file path on the left in the small box.
+You may add images as many times as you like until the application crashes.  If the image does not appear, you must expand the window.
+The next image should be placed next to the previous one.
+Clicking delete should do nothing.  You must select a file on the left first.
+Click a file path to delete and click delete to remove the file path and image.
+Clicking Save takes what is on the canvas and saves it to an image file that you select.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Buttons:
+
+"Add"
+Loads a png, jpeg, or jpg file onto the canvas.  Displays file name and path on the left in the listbox.
+
+"Delete"
+Removes the image and filepath from the sprite list.
+
+"Save"
+Gets the image from the canvas and writes to an xml file that includes the x/y positions and width/height.
+
+Functions:   
+
+ClearCanvas();
+clears the canvas and redraws everything if something was erased
+
+SaveXML();
+This saves attributes to and creates an xml file
+
+Features:
+
+Combines loaded images from right to left and saves the final image.  Deleting one image will have the next image redraw at where it used to be.
+Saves image sizes and positions to an xml document.
+
+Possible Improvements:
+
+-Drag and drop placement
+-Allow cropping of picture before saving
+-Snap to adjustable grid
+-Support GIFs
+-Animation handler
+-Allow for pixel editing
+
+
