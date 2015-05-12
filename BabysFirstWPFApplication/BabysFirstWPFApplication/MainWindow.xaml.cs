@@ -44,23 +44,28 @@ namespace SpriteSheet
 
         }
       
-        void SaveXml()
+        void SaveXml(string temp)
         {
-            XDocument myXml = new XDocument(new XDeclaration ("1.0", "utf-8", "yes"));
+            XDocument myXml = new XDocument(new XDeclaration (/* version of xml*/"1.0", /*encoding*/ "utf-8", /*standalone*/ "yes"));
 
             Object[] myArray = new Object[spriteList.Count];
             for (int i = 0; i < spriteList.Count; i++)
             {
+
                 XElement spriteLocation = new XElement("sprite");
                 spriteLocation.SetAttributeValue("x", 25);
                 spriteLocation.SetAttributeValue("y", 25);
                 spriteLocation.SetAttributeValue("width", 25);
                 spriteLocation.SetAttributeValue("height", 25);
-
                 myArray[i] = spriteLocation;
+
             }
 
             myXml.Add(myArray);
+            string fileName = System.IO.Path.ChangeExtension(temp, ".xml");
+            FileStream myFileStream = new FileStream(fileName, FileMode.Create);
+            myXml.Save(myFileStream);
+            myFileStream.Close();
             
         }
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -94,7 +99,7 @@ namespace SpriteSheet
                 MySprite spriteName = new MySprite(LoadedFile.FileName);
             
                 spriteList.Add(spriteName);
-
+               
                 ClearCanvas();
 
 
@@ -150,6 +155,7 @@ namespace SpriteSheet
         {
             
             Microsoft.Win32.SaveFileDialog savedFile = new Microsoft.Win32.SaveFileDialog();
+            savedFile.DefaultExt = ".png";
             
             if (savedFile.ShowDialog() == true)
             {
@@ -164,16 +170,24 @@ namespace SpriteSheet
                 png.Frames.Add(BitmapFrame.Create(tempImage));
 
                 // OPen a stream to the desired file 
-               
-                // Save to the stream
-                System.IO.MemoryStream imageStream = new System.IO.MemoryStream();
-                png.Save(imageStream);
-                //Save(savedFile.FileName);
-                // Close the stream
-                imageStream.Close();
-                System.IO.File.WriteAllBytes(savedFile.FileName, imageStream.ToArray());
+
+
+                FileStream fileStream = new FileStream(savedFile.FileName, FileMode.Create);
+
+                png.Frames.Add(BitmapFrame.Create(tempImage));
+                png.Save(fileStream);
+                fileStream.Close();
                 Console.WriteLine("Completed");
-            
+                SaveXml(savedFile.FileName);
+
+                //// Save to the stream
+                //System.IO.MemoryStream imageStream = new System.IO.MemoryStream();
+                //png.Save(imageStream);
+                ////Save(savedFile.FileName);
+                //// Close the stream
+                //imageStream.Close();
+                //System.IO.File.WriteAllBytes(savedFile.FileName, imageStream.ToArray());
+                
             }
 
             //try
